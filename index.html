@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head><title>Menú de Pruebas</title></head>
+<body>
+  <h1>Menú de Pruebas Cypress</h1>
+
+  <section>
+    <h2>📝 Registro</h2>
+    <button onclick="ejecutarPrueba('registro', 'registroComprador')">Registro Comprador</button>
+    <button onclick="ejecutarPrueba('registro', 'registroOrganizadorExitoso')">Organizador Exitoso</button>
+    <button onclick="ejecutarPrueba('registro', 'registroOrganizadorEmailRepetido')">Email Repetido</button>
+    <button onclick="ejecutarPrueba('registro', 'registroOrganizadorValidacionDatos')">Validación de Datos</button>
+  </section>
+
+  <section>
+    <h2>🔐 Login</h2>
+    <button onclick="ejecutarPrueba('login', 'loginExitoso')">Login Exitoso</button>
+    <button onclick="ejecutarPrueba('login', 'loginOrganizador')">Login Organizador</button>
+  </section>
+
+  <section>
+    <h2>🎬 Flujos</h2>
+    <button onclick="ejecutarPrueba('flujos', 'flujoCompradorCompraEntradas')">Compra de Entradas</button>
+    <button onclick="ejecutarPrueba('flujos', 'flujoOrganizadorCrearEvento')">Crear Evento</button>
+    <button onclick="ejecutarPrueba('flujos', 'flujoOrganizadorConfigurarEvento')">Configurar Evento</button>
+    <button onclick="ejecutarPrueba('flujos', 'flujoOrganizadorDetalleLugarSala')">Lugar y Sala</button>
+    <button onclick="ejecutarPrueba('flujos', 'flujoOrganizadorPreciosSectores')">Precios y Sectores</button>
+    <button onclick="ejecutarPrueba('flujos', 'flujoOrganizadorImagenConfirmacion')">Confirmación de Evento</button>
+  </section>
+
+  <link rel="stylesheet" href="./css/styles.css" />
+
+<script>
+  function ejecutarPrueba(seccion, test) {
+    const btn = event.target;
+    const loader = document.createElement('span');
+    loader.classList.add('loader');
+    btn.disabled = true;
+    btn.appendChild(loader);
+
+    fetch(`/api/run-test?seccion=${seccion}&test=${test}`)
+      .then(res => res.json())
+      .then(data => {
+        alert(data.resultado);
+      })
+      .catch(err => {
+        alert('Error de conexión');
+      })
+      .finally(() => {
+        btn.removeChild(loader);
+        btn.disabled = false;
+      });
+  }
+</script>
+</body>
+</html>

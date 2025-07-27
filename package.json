@@ -1,0 +1,8 @@
+{
+  "name": "cypress-plantilla-reporting",
+  "version": "1.0.0",
+  "devDependencies": {
+    "cypress": "^13.3.0",
+    "cypress-mochawesome-reporter": "^3.4.1"
+  }
+}
